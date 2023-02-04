@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import cyber from "../2-utils/cyber";
+import imageHandler from "../2-utils/image-handler";
 import verifyLoggedIn from "../3-middleware/verify-logged-in";
 import userVacationsService from "../5-services/user-vacations-service";
 
@@ -46,6 +47,18 @@ router.delete("/user/follow/:vacationId([0-9]+)", verifyLoggedIn,  async (reques
     catch (err: any) {
         next(err);
     }
+});
+
+// GET http://localhost:4000/api/admin/vacations/images/:imageName
+router.get("/user/vacations/images/:imageName", async (request: Request, response: Response, next: NextFunction) => {
+    try {
+        const imageName = request.params.imageName;
+        const absolutePath = imageHandler.getAbsolutePath(imageName)
+        response.sendFile(absolutePath);
+    }
+    catch (err: any) {
+        next(err);
+    }
 });
 
 

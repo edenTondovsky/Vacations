@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import cyber from "../2-utils/cyber";
+import imageHandler from "../2-utils/image-handler";
 import verifyAdmin from "../3-middleware/verify-admin";
 import VacationModel from "../4-models/vacation-model";
 import adminVacationsService from "../5-services/admin-vacations-service";
@@ -43,7 +44,7 @@ router.post("/admin/vacations", verifyAdmin, async (request: Request, response: 
 });
 
 //PUT http://localhost:4000/api/admin/vacations/:vacationId
-router.put("/admin/vacations/:vacationId", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
+router.put("/vacations/:vacationId", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
     try {
         request.body.vacationId = +request.params.vacationId;
         request.body.image = request.files?.image;
@@ -68,5 +69,18 @@ router.delete("/admin/vacations/:vacationId", verifyAdmin, async (request: Reque
         next(err);
     }
 });
+
+// GET http://localhost:4000/api/admin/vacations/images/:imageName
+router.get("admin/vacations/images/:imageName", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
+    try {
+        const imageName = request.params.imageName;
+        const absolutePath = imageHandler.getAbsolutePath(imageName)
+        response.sendFile(absolutePath);
+    }
+    catch (err: any) {
+        next(err);
+    }
+});
+
 
 export default router;
