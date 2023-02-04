@@ -17,6 +17,17 @@ router.get("/admin/vacations", verifyAdmin, async (request: Request, response: R
         next(err);
     }
 });
+// Get http://localhost:4000/api/admin/vacations/:vacationId
+router.get("/admin/vacations/:vacationId", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
+    try {
+        const vacationId = +request.params.vacationId;
+        const vacations = await adminVacationsService.getOneVacation(vacationId);
+        response.json(vacations);
+    }
+    catch (err: any) {
+        next(err);
+    }
+});
 
 // POST http://localhost:4000/api/admin/vacations
 router.post("/admin/vacations", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {

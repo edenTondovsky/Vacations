@@ -1,4 +1,5 @@
 import { OkPacket } from "mysql";
+import appConfig from "../2-utils/appConfig";
 import dal from "../2-utils/dal";
 import imageHandler from "../2-utils/image-handler";
 import { ResourceNotFoundError } from "../4-models/client-errors";
@@ -10,6 +11,18 @@ async function getAllVacationsForAdmin(user: UserModel): Promise<VacationModel[]
     const vacations = await dal.execute(sql);
     return vacations;
 }
+
+async function getOneVacation(vacationId: number): Promise<VacationModel> {
+
+    const sql = `SELECT vacationId ,destination, description,startDate, endDate, price, imageName
+    FROM vacations
+    WHERE vacationId = ?`;
+    const vacation = await dal.execute(sql, vacationId, imageHandler.getAbsolutePath);
+    return vacation;
+}
+
+
+
 
 async function addVacation(vacation: VacationModel): Promise<VacationModel> {
     // Validations
@@ -67,12 +80,13 @@ async function deleteVacation(vacationId: number) {
 
     const sql = `DELETE FROM vacations WHERE vacationId = ?`;
     const result: OkPacket = await dal.execute(sql, vacationId);
-    
+
     if (result.affectedRows === 0) throw new ResourceNotFoundError(vacationId);
 }
 
 export default {
     getAllVacationsForAdmin,
+    getOneVacation,
     addVacation,
     updateVacation,
     deleteVacation

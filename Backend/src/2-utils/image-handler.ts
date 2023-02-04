@@ -4,14 +4,14 @@ import fsPromises from "fs/promises"
 import path from "path";
 import fs from "fs";
 
-const productImagesFolder = "./src/1-assets/images/";
+const vacationImagesFolder = "./src/1-assets/images/";
 
 async function saveImage(image: UploadedFile): Promise<string> {
 
     const uniqueImageName = createImageName(image.name);
 
     // Create unique image name:
-    const absolutePath = productImagesFolder + uniqueImageName;
+    const absolutePath = vacationImagesFolder + uniqueImageName;
 
     // Save to disk:
     await image.mv(absolutePath); // mv = move
@@ -41,7 +41,7 @@ async function deleteImage(existingImageName: string): Promise<void> {
         if (!existingImageName) return;
 
         // Delete image from disk:
-        await fsPromises.unlink(productImagesFolder + existingImageName);
+        await fsPromises.unlink(vacationImagesFolder + existingImageName);
     }
     catch (err: any) {
         console.log(err.message);
