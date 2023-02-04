@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import UserModel from "../../../Models/user-model";
 import authService from "../../../Services/AuthService";
-import { authStore } from "../../Redux/AuthState";
+import { authStore } from "../../../Redux/AuthState";
 import "./AuthMenu.css";
 
 function AuthMenu(): JSX.Element {

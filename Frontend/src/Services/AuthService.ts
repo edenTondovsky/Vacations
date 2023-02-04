@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AuthActionType, authStore } from "../Components/Redux/AuthState";
+import { AuthActionType, authStore } from "../Redux/AuthState";
 import CredentialsModel from "../Models/credentials-model";
 import UserModel from "../Models/user-model";
 import appConfig from "../Utils/AppConfig";

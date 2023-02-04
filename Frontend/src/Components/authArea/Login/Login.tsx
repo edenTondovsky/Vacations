@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import CredentialsModel from "../../../Models/credentials-model";
 import authService from "../../../Services/AuthService";
 import notify from "../../../Utils/Notify";
-import { authReducer, authStore } from "../../Redux/AuthState";
+import { authReducer, authStore } from "../../../Redux/AuthState";
 import "./Login.css";
 
 function Login(): JSX.Element {
@@ -30,7 +30,7 @@ function Login(): JSX.Element {
             <form onSubmit={handleSubmit(send)}>
 
                 <label>Email:</label>
-                <input type="text" {...register("email", CredentialsModel.emailValidation)} />
+                <input type="email" {...register("email", CredentialsModel.emailValidation)} />
                 <span className="Err">{formState.errors.email?.message}</span>
 
                 <label>Password:</label>
