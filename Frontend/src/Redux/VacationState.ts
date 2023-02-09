@@ -1,5 +1,6 @@
 
 import VacationModel from "../Models/vacation-model";
+import { createStore } from "redux";
 
 //1.App state
 export class VacationState {
@@ -12,6 +13,8 @@ export enum vacationsActionType {
     AddVacation = "AddVacation",
     UpdateVacation = "UpdateVacation",
     DeleteVacation = "DeleteVacation",
+    FollowVacation = "FollowVacation",
+    UnFollowVacation = "UnFollowVacation"
 }
 
 //3. Action - a single describing single operation on data:
@@ -42,9 +45,27 @@ export function vacationsReducer(currentState = new VacationState(), action: vac
 
         case vacationsActionType.DeleteVacation:
             const indexToDelete = newState.vacations.findIndex(v => v.vacationId === action.payload);
-            if(indexToDelete >=0){
+            if(indexToDelete >= 0){
                 newState.vacations.splice(indexToDelete ,1)
             }
             break;
-    }
+
+            case vacationsActionType.FollowVacation:
+                const indexToFollow = newState.vacations.findIndex(v => v.vacationId === action.payload.vacationId);
+                if(indexToFollow >= 0){
+                    newState.vacations[indexToFollow] = action.payload;
+                }
+                break;
+
+            case vacationsActionType.UnFollowVacation:
+                const indexToUnFollow = newState.vacations.findIndex(v=>v.vacationId === action.payload);
+                if(indexToUnFollow >= 0 ){
+                    newState.vacations.splice(indexToUnFollow ,1)
+                }
+            }
+    return newState;
 }
+
+
+//5.Store - Redux manager
+export const vacationStore = createStore(vacationsReducer);
