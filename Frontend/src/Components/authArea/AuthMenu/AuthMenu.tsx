@@ -11,7 +11,7 @@ function AuthMenu(): JSX.Element {
 
     useEffect(() => {
         setUser(authStore.getState().user);
-
+        
         //listen to authState changes:
         authStore.subscribe(() => {
             setUser(authStore.getState().user);

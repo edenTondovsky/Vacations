@@ -30,7 +30,7 @@ export function vacationsReducer(currentState = new VacationState(), action: vac
 
     switch (action.type) {
         case vacationsActionType.FetchVacations:
-            newState.vacations.push(action.payload);
+            newState.vacations = action.payload;
             break;
         case vacationsActionType.AddVacation:
             newState.vacations.push(action.payload);

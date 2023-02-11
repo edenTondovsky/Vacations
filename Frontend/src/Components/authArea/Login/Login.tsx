@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import CredentialsModel from "../../../Models/credentials-model";
 import authService from "../../../Services/AuthService";
 import notify from "../../../Utils/Notify";
-import { authReducer, authStore } from "../../../Redux/AuthState";
 import "./Login.css";
 
 function Login(): JSX.Element {
 
     const { register, handleSubmit, formState } = useForm<CredentialsModel>();
+    
     const navigate = useNavigate();
 
     async function send(credentials: CredentialsModel) {

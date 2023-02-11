@@ -29,20 +29,23 @@ private static postValidationSchema = Joi.object({
     vacationId: Joi.number().optional().integer().positive(),
     destination: Joi.string().required().min(2).max(50),
     description: Joi.string().required().min(2).max(1000),
-    startSate: Joi.date().required(),
-    endSate: Joi.date().required(),
+    startDate: Joi.date().required(),
+    endDate: Joi.date().required(),
     price: Joi.number().positive().min(0).max(20000),
     imageName: Joi.string().forbidden(),
+    image: Joi.object().required()
 });
 
 //validation for update vacation
 private static putValidationSchema = Joi.object({
-    vacationId: Joi.number().optional().integer().positive(),
-    destination: Joi.string().optional().min(2).max(50),
-    description: Joi.string().optional().min(2).max(1000),
-    startSate: Joi.date().optional(),
-    endSate: Joi.date().optional(),
-    imageName: Joi.string().optional().min(38).max(50),
+    vacationId: Joi.number().required().integer().positive(),
+    destination: Joi.string().required().min(2).max(50),
+    description: Joi.string().required().min(2).max(1000),
+    startDate: Joi.date().required(),
+    endDate: Joi.date().required(),
+    price: Joi.number().positive().min(0).max(20000),
+    imageName: Joi.string().forbidden(),
+    image: Joi.object().required()
 });
 
 //Function for use POST validate

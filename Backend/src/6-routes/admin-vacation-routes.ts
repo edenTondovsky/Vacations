@@ -44,7 +44,7 @@ router.post("/admin/vacations", verifyAdmin, async (request: Request, response: 
 });
 
 //PUT http://localhost:4000/api/admin/vacations/:vacationId
-router.put("/vacations/:vacationId", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
+router.put("/admin/vacations/:vacationId", verifyAdmin, async (request: Request, response: Response, next: NextFunction) => {
     try {
         request.body.vacationId = +request.params.vacationId;
         request.body.image = request.files?.image;

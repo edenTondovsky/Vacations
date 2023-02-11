@@ -7,19 +7,19 @@ import appConfig from "../Utils/AppConfig";
 class UserVacationService {
 
     public async getAllVacations(): Promise<VacationModel[]> {
-        
         let vacations = vacationStore.getState().vacations;
+        console.log("a");
+
         if (vacations.length === 0) {
             const response = await axios.get<VacationModel[]>(appConfig.UserVacationsUrl);
-            vacations = response.data;
-            vacationStore.dispatch({ type: vacationsActionType.FetchVacations, payload: vacations })
+            console.log("b");
+            const vacations = response.data;
+    
+            vacationStore.dispatch({ type: vacationsActionType.FetchVacations, payload: vacations });
         }
-        return vacations
+        console.log(vacations);
+        return vacations;
     }
-
-
-
-
 }
 
 const userVacationService = new UserVacationService();
